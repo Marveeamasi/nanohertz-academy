@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano-hertz registeration</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="mb-5">
+        <h3 class="mb-3">Sign Up</h3>
+        <input type="text" placeholder="Full name.." id="nameInp" class="form-control mb-3">
+        <input type="text" placeholder="Username.." id="userInp" class="form-control mb-3">
+        <input type="email" placeholder="Email.." id="emailInp" class="form-control mb-3">
+        <input type="password" placeholder="password.." id="passInp" class="form-control mb-3">
+        <button type="text"  id="sub-btn" class="btn w-100 btn-outline-primary mb-3">Sign Up</button>
+        <a href="login.html" class="badge badge-secondary py-1 w-100">Already have a user?</a>
+    </div>
+    <script type="module">
+         // SETTING UP FIREBASE DB
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+       
+       const firebaseConfig = {
+         apiKey: "AIzaSyB2_3I_K_8-c5fZg2rHL8PBMH3Bfl1WVVM",
+         authDomain: "nano-hertz.firebaseapp.com",
+         databaseURL: "https://nano-hertz-default-rtdb.firebaseio.com",
+         projectId: "nano-hertz",
+         storageBucket: "nano-hertz.appspot.com",
+         messagingSenderId: "956256777357",
+         appId: "1:956256777357:web:293e51829c389424ab9ec4"
+       };
+     
+       const app = initializeApp(firebaseConfig);
+
+       import {getDatabase, ref, set, child, get} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+
+       const db = getDatabase()
+
+       //REFERENCES
+       const username = document.getElementById('userInp');
+       const email = document.getElementById('emailInp');
+       const password = document.getElementById('passInp');
+       const fullname = document.getElementById('nameInp')
+       const submitBtn = document.getElementById('sub-btn')
+
+//VALIDATION
+const validation=()=>{
+    let nameRegex = /[a-zA-Z\s]+/;
+    let email = /[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com/;
+    let usernameRegex = /[a-zA-Z0-9]{5,}/;
+
+    if(!nameRegex.test(name.value)){
+        alert('The name should only contain alphabets');
+        return;
+    }
+    if(!email.test(email.value)){
+        alert('Please enter a valid name');
+        return;
+    }
+    if(!usernameRegex.test(username.value)){
+        alert('Username can only be alhanumeric\n-Username must contain at least 5 characters\n-Username cannot contain empty spaces');
+        return;
+    }
+}
+
+//REGISTER USER TO FIREBASE
+
+      </script>
+
+</body>
+</html>
