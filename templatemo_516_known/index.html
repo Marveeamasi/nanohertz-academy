@@ -65,8 +65,15 @@ https://templatemo.com/tm-516-known
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="#"><i class="fa fa-whatsapp"></i></li>
+                         <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+                              <li class="nav-item">
+                                   <a id="userlink" class="nav-link" href="#">Username</a>
+                              </li>
+                                   <li class="nav-item">
+                                        <a href="#" id="signoutlink" class="nav-link">Sign Out</a>
+                                   </li>
                     </ul>
+                   
                </div>
 
           </div>
@@ -707,6 +714,59 @@ https://templatemo.com/tm-516-known
      <script src="js/owl.carousel.min.js"></script>
      <script src="js/smoothscroll.js"></script>
      <script src="js/custom.js"></script>
+     <script>
+//REFERENCE
+          let userlink = document.getElementById('userlink');
+          let signoutlink = document.getElementById('signoutlink');
+          var currentUser = null;
+
+//FUNCTION          
+          function getUsername(){
+               let keepLoggedIn = localStorage.getItem('keepLoggedIn')
+
+               if(keepLoggedIn == 'yes'){
+                   currentUser = JSON.parse(localStorage.getItem('user'));
+               }else{
+                    currentUser = JSON.parse(sessionStorage.getItem('user'));
+               }
+          }
+
+          function signout(){
+               sessionStorage.removeItem('user');
+               localStorage.removeItem('user');
+               localStorage.removeItem('keepLoggedIn');
+               window.location="index.html";
+          }
+
+//WINDOW LOADS
+          window.onload = function(){
+               getUsername();
+               if(currentUser == null){
+                    userlink.innerText = "Create New Account";
+                    //userlink.classList.replace("nav-link", "btn");
+                    //userlink.classList.add("btn-primary");
+                    userlink.href = "register.html";
+
+                    signoutlink.innerText = "Login";
+                   // signoutlink.classList.replace("nav-link", "btn");
+                    //signoutlink.classList.add("btn-success");
+                    signoutlink.href = "login.html";
+
+               }else{
+                    userlink.innerText = currentUser.username;
+                   // userlink.classList.replace("btn", "nav-link");
+                   // userlink.classList.remove("btn-primary");
+                    userlink.href = "#";
+
+                    signoutlink.innerText = "Sign Out";
+                  //  signoutlink.classList.replace("nav-link", "btn");
+                   // signoutlink.classList.remove("btn-success");
+                    signoutlink.href = "javascript:signout()";
+
+               }
+          }          
+
+     </script>
     
 </body>
 </html>
